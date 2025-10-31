@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendición de Cuentas - Representación Profesoral Sede Manizales | UNAL</title>
+    
+    <!-- Ancizar Sans Font -->
+    <style>
+        @font-face {
+            font-family: 'Ancizar Sans';
+            src: url('https://github.com/cbellom/UNViewer/raw/master/Assets/Fonts/Fuente%20Ancizar%204.0/Ancizar%20Sans-Bold%20Italic.otf') format('opentype');
+            font-weight: 700;
+            font-style: italic;
+        }
+        
+        @font-face {
+            font-family: 'Ancizar Sans';
+            src: url('https://github.com/cbellom/UNViewer/raw/master/Assets/Fonts/Fuente%20Ancizar%204.0/Ancizar%20Sans-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Ancizar Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            color: #1E1E1E;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Colores UNAL - Paleta Oficial Correcta */
+        .unal-verde-claro { background: #94b43b; } /* Pantone 376 C - para boxes */
+        .unal-verde-oscuro { background: #466b3f; } /* Pantone 7743 C - elementos intermedios */
+        .unal-verde-muy-oscuro { background: #1a3020; } /* Verde casi negro - líneas y separadores */
+        .unal-amarillo { background: #f9a825; }
+        .unal-negro { background: #1E1E1E; }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            color: white;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border-top: 8px solid #94b43b;
+            border-bottom: 8px solid #94b43b;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .authors {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .header .period {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Navegación */
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem;
+            border: 3px solid #1a3020;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            flex: 1 1 auto;
+            min-width: 150px;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            font-family: 'Ancizar Sans', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: #1a3020;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: #94b43b;
+            color: #1a3020;
+        }
+
+        /* Contenido */
+        .content {
+            background: white;
+            padding: 3rem;
+            min-height: 600px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a3020;
+            border-bottom: 4px solid #1a3020;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a3020;
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* Cajas informativas */
+        .info-box {
+            background: linear-gradient(135deg, #e8f4dc 0%, #d4e8c1 100%);
+            border-left: 6px solid #1a3020;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            color: #1a3020;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #94b43b 0%, #7a9530 100%);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 4px solid #1a3020;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1a3020;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #c8e6a0 0%, #b8dc8e 100%);
+            border-left: 6px solid #1a3020;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: #1a3020;
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border: 4px solid #ff0000;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Stats boxes */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94b43b;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* Timeline */
+        .timeline-item {
+            border-left: 4px solid #1a3020;
+            padding-left: 2rem;
+            margin-left: 1rem;
+            padding-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #94b43b;
+            border: 4px solid white;
+            border-radius: 50%;
+            position: absolute;
+            left: -12px;
+            top: 0;
+            box-shadow: 0 0 0 4px #1a3020;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: #466b3f;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            margin-top: 1rem;
+        }
+
+        .timeline-content strong {
+            color: #1a3020;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.8;
+            border-radius: 8px;
+        }
+
+        .logro-badge {
+            display: inline-block;
+            background: #94b43b;
+            color: #1a3020;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+        }
+
+        .accion-badge {
+            display: inline-block;
+            background: #f9a825;
+            color: #1a3020;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+        }
+
+        .legal-badge {
+            display: inline-block;
+            background: #ff5252;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            color: white;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #94b43b;
+        }
+
+        .footer-content {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .footer-meta {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(148, 180, 59, 0.3);
+        }
+
+        /* List styling */
+        ul.styled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.styled-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        ul.styled-list li::before {
+            content: '▸';
+            color: #466b3f;
+            font-weight: 700;
+            position: absolute;
+            left: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .proceso-item {
+            background: white;
+            border: 3px solid #1a3020;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .proceso-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a3020;
+            margin-bottom: 0.5rem;
+        }
+
+        .proceso-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #94b43b;
+            color: #1a3020;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Rendición de Cuentas</h1>
+            <div class="subtitle">Representación Profesoral al Consejo de Sede</div>
+            <div class="subtitle">Universidad Nacional de Colombia - Sede Manizales</div>
+            <div class="authors">
+                <strong>IVETH KATHERINE COLLAZOS SILVA</strong><br>
+                <strong>VICTORIA EUGENIA VALENCIA MAYA</strong><br>
+                Representantes Profesorales
+            </div>
+            <div class="period">Periodo 2024-2025 | Actualizado: 31 de octubre de 2025</div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="nav">
+            <button class="nav-btn active" onclick="showSection('resumen')">Resumen Ejecutivo</button>
+            <button class="nav-btn" onclick="showSection('timeline')">Línea de Tiempo Completa</button>
+            <button class="nav-btn" onclick="showSection('logros')">Logros y Victorias</button>
+            <button class="nav-btn" onclick="showSection('analisis')">Análisis de Situación</button>
+            <button class="nav-btn" onclick="showSection('procesos')">Procesos en Seguimiento</button>
+            <button class="nav-btn" onclick="showSection('conclusiones')">Conclusiones</button>
+        </div>
+
+        <!-- Contenido -->
+        <div class="content">
+            <!-- RESUMEN EJECUTIVO -->
+            <div id="resumen" class="section active">
+                <h2 class="section-title">Resumen Ejecutivo de Gestión (2024-2025)</h2>
+                
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    La gestión de la Representación Profesoral se ha centrado en la <strong>veeduría rigurosa</strong>, 
+                    la <strong>defensa de la transparencia</strong> y la <strong>protección del estamento docente</strong>. 
+                    En el periodo 2024-2025, esta labor de fiscalización y defensa se cuantifica en más de 
+                    <strong>25 acciones documentadas</strong>.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number">13</span>
+                        <span class="stat-label">Peticiones, Oficios y<br>Solicitudes Formales</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Comunicados<br>Públicos</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Acciones<br>Legales</span>
+                    </div>
+                </div>
+
+                <h3 class="section-subtitle">Acciones Documentadas</h3>
+                
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">📝 13 Peticiones, Oficios y Solicitudes Formales</h4>
+                    <p>Se radicaron requerimientos formales ante diversas instancias (DAMA, DIMA, Decanaturas, CSU, Consejo de Sede) 
+                    exigiendo transparencia, cumplimiento de la ley y claridad en la gestión.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">📢 7 Comunicados Públicos</h4>
+                    <p>Se informó de manera proactiva al estamento profesoral sobre irregularidades, incumplimientos de acuerdos 
+                    y riesgos detectados en temas críticos como la creación de la FCHS, la financiación de la MECUN, 
+                    la gestión de las Aulas STEAM y el clima laboral.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">⚖️ 5 Acciones Legales</h4>
+                    <p>Se interpusieron <strong>4 Acciones de Tutela</strong> y <strong>1 Incidente de Desacato</strong> 
+                    para defender el derecho a la información, la transparencia y la seguridad personal.</p>
+                </div>
+
+                <h3 class="section-subtitle">Balance General</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-box" style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Victorias y<br>Logros Concretos</span>
+                    </div>
+                    <div class="stat-box" style="background: linear-gradient(135deg, #94b43b 0%, #7a9530 100%); color: #1a3020;">
+                        <span class="stat-number" style="color: #1a3020;">6</span>
+                        <span class="stat-label">Procesos Críticos<br>en Seguimiento</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LÍNEA DE TIEMPO COMPLETA -->
+            <div id="timeline" class="section">
+                <h2 class="section-title">Línea de Tiempo Completa (2024-2025)</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Cronología detallada de todas las acciones de veeduría, gestión y defensa del estamento profesoral</p>
+
+                <div style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%); color: #94b43b; padding: 1.5rem; margin: 2rem 0; text-align: center; font-size: 1.5rem; font-weight: 700;">
+                    AÑO 2024
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Mayo - Agosto 2024</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">ACCIÓN</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Acciones frente a la Toma del Campus</h4>
+                        <p><strong>Acción:</strong> Tras la toma de las instalaciones (mayo-julio 2024), la administración interpone 
+                        denuncias penales por hurto y daño en bien público, documentando pérdidas por <strong>$14.706.900</strong> 
+                        en la Tienda Universitaria y <strong>$20.269.416</strong> en daños a la infraestructura.</p>
+                        <div class="info-box" style="margin-top: 1rem;">
+                            <strong>Números de Noticia Criminal (NUNC):</strong><br>
+                            • NUNC: 170016000256202415970<br>
+                            • NUNC: 170016000256202413807
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Septiembre 2024 - Septiembre 2025</div>
+                    <div class="timeline-content">
+                        <span class="logro-badge">LOGRO</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría por Proyectos de Investigación FIA</h4>
+                        <p><strong>Acción:</strong> Acompañamiento exhaustivo a los profesores ganadores de la "Convocatoria de la 
+                        Facultad de Ingeniería y Arquitectura 2024 para el Apoyo a Proyectos de Investigación", cuyos proyectos 
+                        fueron bloqueados administrativamente por más de un año.</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>✓ LOGRO:</strong> Después de más de un año de presión y veeduría constante, se logró la apertura 
+                            y autorización de ejecución de los proyectos de investigación, defendiendo la labor misional de los docentes 
+                            frente a la parálisis administrativa.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">1 de octubre de 2024</div>
+                    <div class="timeline-content">
+                        <span class="logro-badge">LOGRO</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría sobre Carga Laboral Docente</h4>
+                        <p><strong>Petición:</strong> Solicitud de información a la Dirección Académica sobre la conformación y 
+                        metodología de la "mesa de estudio de los planes de trabajo académico (PTA)".</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>✓ LOGRO:</strong> La veeduría y la petición resultaron en el cierre de esta mesa de estudio, 
+                            mitigando el temor del profesorado a una posible persecución laboral a través de la modificación de los PTA.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">12 de noviembre de 2024</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">ACCIÓN</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Participación Institucional</h4>
+                        <p><strong>Petición REP.PROF.008-2024:</strong> Se formaliza la delegación de la Representante Suplente, 
+                        Prof. Victoria Eugenia Valencia Maya, para participar activamente ante el Comité de Extensión de Sede.</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>✓ LOGRO:</strong> Se asegura la presencia y voz del estamento profesoral en los comités 
+                            misionales de la Sede.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">4 de diciembre de 2024</div>
+                    <div class="timeline-content">
+                        <span class="logro-badge">LOGRO</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa del Clima Laboral</h4>
+                        <p><strong>Petición REP.PROF.015-2024:</strong> Petición formal al Decano de la Facultad de Ingeniería 
+                        y Arquitectura solicitando su intervención urgente en la Escuela de Arquitectura.</p>
+                        <p><strong>Motivo:</strong> Se denuncian quejas del cuerpo docente sobre un "estilo de dirección que es 
+                        percibido como autocrático" y el "deterioro del clima organizacional".</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>✓ LOGRO:</strong> Esta intervención y la presión del estamento docente resultaron en el retiro 
+                            del cargo del director de la Escuela, logrando una mejora en el clima laboral.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%); color: #94b43b; padding: 1.5rem; margin: 3rem 0 2rem 0; text-align: center; font-size: 1.5rem; font-weight: 700;">
+                    AÑO 2025
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Enero 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">DENUNCIA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Hostigamiento (Pre-FCHS)</h4>
+                        <p><strong>Comunicado 001:</strong> Se presenta una denuncia formal por hostigamiento y persecución por parte 
+                        del profesor que posteriormente sería nombrado Decano de la nueva FCHS.</p>
+                        <div class="danger-box" style="margin-top: 1rem;">
+                            <strong>Resultado:</strong> La Vicerrectoría de Sede no da respuesta ni trámite a la denuncia, situación 
+                            que se agrava con el posterior nombramiento del profesor.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">3 de febrero de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">VEEDURÍA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría Académica y Financiera (Creación FCHS)</h4>
+                        <p><strong>Comunicado N.º 01:</strong> Ante la discusión de la creación de la Facultad de Ciencias Humanas 
+                        y Sociales (FCHS), la Representación Profesoral presenta un documento público con <strong>15 objeciones 
+                        técnicas, académicas y financieras rigurosas</strong>.</p>
+                        <ul class="styled-list" style="margin-top: 1rem;">
+                            <li>Falta de rigor metodológico</li>
+                            <li>Ausencia de un estudio de viabilidad y de mercados</li>
+                            <li>Falta de concertación con las facultades existentes</li>
+                            <li>Falta de claridad en la sostenibilidad financiera</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">7 de febrero de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">ASAMBLEA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Garantías de Participación Docente</h4>
+                        <p><strong>Asamblea Profesoral:</strong> 71 asistentes debaten la creación de la FCHS.</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>Resultado:</strong> La asamblea vota (25 a 17) por "Continuar con la creación de la facultad", 
+                            pero establece una condición vinculante: que la administración "recoja y resuelva las observaciones de 
+                            la comunidad docente y se comprometa a firmar unas garantías de concertación y participación".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">11 de febrero de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">DENUNCIA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Incumplimiento de Acuerdos</h4>
+                        <p><strong>Comunicado N.º 002:</strong> Se denuncia públicamente que, violando el compromiso de la Asamblea, 
+                        la administración de la Sede agenda reuniones clave sobre la FCHS y el Plan Integral de Cobertura (PIC) con 
+                        el Vicerrector General, excluyendo explícitamente a la Representación Profesoral.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">31 de marzo de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">VEEDURÍA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Lucha contra Conflicto de Interés</h4>
+                        <p><strong>Petición REP.PROF.020-2025:</strong> Solicitud de suspensión inmediata de la convocatoria de 
+                        estudiante auxiliar DIMA_011-2025.</p>
+                        <p><strong>Motivo:</strong> Se denuncia que la convocatoria presenta requisitos cerrados que presuntamente 
+                        favorecen únicamente a estudiantes del grupo de investigación GIPEM, el cual es dirigido por la propia 
+                        Vicerrectora de Sede.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">3 de abril de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">PETICIÓN</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Activación de Veeduría Masiva</h4>
+                        <p><strong>Petición REP.PROF.022-2025:</strong> Petición de 10 puntos a la Directora Académica solicitando 
+                        información crítica sobre: Plan de Acción, proyectos, ejecución presupuestal y gestión del talento humano.</p>
+                        <p><strong>Petición REP.PROF.021-2025:</strong> Petición de 17 puntos al Director de Investigación y 
+                        Extensión (DIMA) solicitando información crítica sobre gestión, proyectos, propiedad intelectual y estado 
+                        de ejecución de los dineros de Estampilla (Aulas STEAM).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">12 de mayo de 2025</div>
+                    <div class="timeline-content">
+                        <span class="legal-badge">TUTELA 1</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa Judicial del Derecho de Petición</h4>
+                        <p><strong>Rad: ...2025-10120-00</strong></p>
+                        <p>Se interpone Acción de Tutela contra la Directora Académica (Norma Ruiz) por vulnerar el derecho de 
+                        petición, al no entregar respuesta de fondo, clara y precisa a la solicitud del 3 de abril.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">24 de mayo de 2025</div>
+                    <div class="timeline-content">
+                        <span class="legal-badge">TUTELA 2</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa Judicial del Derecho de Petición</h4>
+                        <p><strong>Rad: ...2025-00142-00</strong></p>
+                        <p>Se interpone Acción de Tutela contra el Director de DIMA (Sandro Báez) por vulnerar el derecho de petición, 
+                        al entregar respuestas evasivas e incompletas a la solicitud del 3 de abril.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">26 de mayo de 2025</div>
+                    <div class="timeline-content">
+                        <span class="logro-badge">VICTORIA JUDICIAL</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Victoria en Tutela 1</h4>
+                        <p><strong>Sentencia 117</strong> - Juzgado Tercero Municipal de Pequeñas Causas Laborales</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>AMPARO:</strong> Se AMPARA el derecho fundamental de petición de la Rep. Iveth Katherine Collazos.<br>
+                            <strong>Orden Judicial:</strong> Se ORDENA a la Directora Académica entregar respuesta de fondo, clara, 
+                            precisa y congruente en un término de 48 horas.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">5 de junio de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">DENUNCIA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Exclusión en Instancias Superiores</h4>
+                        <p><strong>Comunicado N.º 003:</strong> Se denuncia públicamente que el Consejo Académico ignoró la solicitud 
+                        formal de la Representación de Sede para asistir a la sesión donde se debatiría y votaría la creación de la FCHS.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">18 de junio de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">DENUNCIA AL CSU</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia por Hostigamiento Institucional</h4>
+                        <p><strong>Comunicado N.º 005:</strong> Se dirige una comunicación al Consejo Superior Universitario (CSU) 
+                        denunciando una "grave afectación al ejercicio de la representación" y un "hostigamiento institucional".</p>
+                        <p><strong>Contexto:</strong> Se denuncia la estigmatización y descalificación sufrida por el Representante 
+                        Profesoral al CSU durante la sesión del 17 de mayo, tras exponer las preocupaciones sobre el clima laboral 
+                        en las sedes (incluyendo Manizales).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">20 de junio de 2025</div>
+                    <div class="timeline-content">
+                        <span class="logro-badge">VICTORIA JUDICIAL</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Victoria en Tutela 2</h4>
+                        <p><strong>Sentencia 132</strong> - Juzgado Cuarto Penal Municipal</p>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>AMPARO:</strong> Se AMPARA el derecho fundamental de petición de las representantes.<br>
+                            <strong>Orden Judicial:</strong> Se ORDENA al Director de DIMA entregar respuesta de fondo al punto 6 
+                            (indicadores de propiedad intelectual) de la petición del 3 de abril.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">1 de julio de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">VEEDURÍA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Irregularidades (FCHS)</h4>
+                        <p><strong>Comunicado N.º 006 y 007:</strong> Se informa que el Consejo Académico avaló la FCHS "ignorando 
+                        las disposiciones explícitas de la Asamblea Profesoral".</p>
+                        <div class="alert-box" style="margin-top: 1rem;">
+                            Se denuncian inconsistencias financieras: <strong>discrepancia de $7 mil millones</strong> entre el 
+                            documento técnico y el Plan de Acción de Sede.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">19 de septiembre de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">POSICIONAMIENTO POLÍTICO</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Posicionamiento sobre MECUN</h4>
+                        <p><strong>Petición CRPS.001-2025:</strong> El Comité de Representantes Profesorales de Manizales informa 
+                        al CSU su decisión de abstenerse de postular una plancha para la Mesa Constituyente Universitaria (MECUN).</p>
+                        <p><strong>Motivo:</strong> Falta de legitimidad, ausencia de garantías para la participación plural y 
+                        democrática, y "presunta irregularidad en la financiación del proceso" (al no tener un proyecto BPUN registrado).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">25 de septiembre de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">PETICIÓN</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Exigencia de Responsabilidad Penal</h4>
+                        <p><strong>Petición REP.PROF.027-2025:</strong> Petición a la Vicerrectora exigiendo que la Sede impulse 
+                        eficazmente las denuncias penales por la toma de 2024.</p>
+                        <p>Se señala que la administración se reunió con los "delegados de la toma" y, por tanto, conoce sus 
+                        identidades, por lo que la denuncia contra "indeterminados" es insuficiente.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">17 de octubre de 2025</div>
+                    <div class="timeline-content">
+                        <span class="legal-badge">TUTELA 3</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa Judicial (Financiación MECUN)</h4>
+                        <p><strong>Rad: ...2025-00346-00</strong></p>
+                        <p>Se interpone Acción de Tutela contra el CSU por vulnerar el derecho de petición, al no responder la 
+                        solicitud del 19 de septiembre sobre la fuente de financiación de la MECUN.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">22 de octubre de 2025</div>
+                    <div class="timeline-content">
+                        <span class="legal-badge">TUTELA 4</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Acción de Tutela por Intimidación</h4>
+                        <p>Se interpone Acción de Tutela contra la Vicerrectora, la Fiscalía y la Defensoría del Pueblo por 
+                        vulneración de los derechos a la seguridad personal y la tranquilidad.</p>
+                        <div class="danger-box" style="margin-top: 1rem;">
+                            <strong>Motivo:</strong> En el Consejo de Sede del 24 de septiembre, tras la Rep. Collazos manifestar 
+                            el "temor generalizado" de la comunidad para denunciar a los autores de la toma, la Vicerrectora respondió 
+                            de forma intimidante, sugiriendo que "debía proteger su vida" y "evaluar su cargo como representante".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">24 de octubre de 2025</div>
+                    <div class="timeline-content">
+                        <span class="accion-badge">VEEDURÍA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría sobre Fondos de Estampilla</h4>
+                        <p><strong>Comunicado N.º 008:</strong> Se informa sobre una sesión de control político en el Concejo de 
+                        Manizales, donde se denunció la presunta no ejecución por parte de la Sede de los fondos de destinación 
+                        específica de la "Estampilla Pro-universidad".</p>
+                        <div class="alert-box" style="margin-top: 1rem;">
+                            Esta situación "podría tener implicaciones administrativas y fiscales de una seriedad incalculable".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Finales de 2025</div>
+                    <div class="timeline-content">
+                        <span class="logro-badge">RESULTADO DE VEEDURÍA</span>
+                        <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Separación de Cargos DAMA y DIMA</h4>
+                        <div class="success-box" style="margin-top: 1rem;">
+                            <strong>✓ LOGRO:</strong> Como resultado de la veeduría constante, las tutelas ganadas y la presión 
+                            pública y administrativa, la Prof. Norma Liliana Ruiz (DAMA) y el Prof. Sandro Baez (DIMA) fueron 
+                            separados de sus cargos. Esto valida las denuncias de la Representación y se considera un logro directo 
+                            de la veeduría profesoral.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGROS Y VICTORIAS -->
+            <div id="logros" class="section">
+                <h2 class="section-title">Victorias y Logros Concretos</h2>
+                
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    La veeduría directa y la presión legal y administrativa resultaron en seis logros concretos que beneficiaron 
+                    directamente al profesorado y fortalecieron la transparencia institucional:
+                </p>
+
+                <div class="success-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">✓ 1. Apertura de Proyectos de Investigación FIA</h3>
+                    <p>Después de más de un año de bloqueo administrativo, se logró la apertura de los proyectos de investigación 
+                    de la Facultad de Ingeniería y Arquitectura, defendiendo la labor misional de los docentes.</p>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">✓ 2. Retiro del Director de la Escuela de Arquitectura</h3>
+                    <p>La intervención y la presión del estamento docente resultaron en el retiro del cargo del director de la 
+                    Escuela, logrando una mejora en el clima laboral ante denuncias de un estilo de dirección autocrático.</p>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">✓ 3. Cierre de la Mesa de Estudio de PTA</h3>
+                    <p>La veeduría y petición formal resultaron en el cierre de la "mesa de estudio de PTA" que amenazaba al 
+                    profesorado, mitigando el temor a una posible persecución laboral.</p>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">✓ 4. Victoria Judicial en Tutela 1 (vs DAMA)</h3>
+                    <p><strong>Sentencia 117 - 26 de mayo de 2025:</strong> El Juzgado Tercero Municipal de Pequeñas Causas Laborales 
+                    AMPARÓ el derecho de petición por ocultamiento de información por parte de la Directora Académica.</p>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">✓ 5. Victoria Judicial en Tutela 2 (vs DIMA)</h3>
+                    <p><strong>Sentencia 132 - 20 de junio de 2025:</strong> El Juzgado Cuarto Penal Municipal AMPARÓ el derecho 
+                    de petición por respuestas evasivas del Director de Investigación.</p>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">✓ 6. Separación de los Cargos de DAMA y DIMA</h3>
+                    <p>Como resultado directo de la veeduría constante, las tutelas ganadas que evidenciaron gestión ineficiente 
+                    y falta de transparencia, y la presión pública, los directores de DAMA y DIMA fueron separados de sus cargos.</p>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 3rem;">
+                    Estos seis logros demuestran que la <strong>veeduría rigurosa y la defensa legal</strong> producen 
+                    <strong>resultados tangibles</strong> para proteger los derechos del profesorado y exigir transparencia 
+                    en la gestión administrativa.
+                </div>
+            </div>
+
+            <!-- ANÁLISIS DE SITUACIÓN -->
+            <div id="analisis" class="section">
+                <h2 class="section-title">Análisis de Situación: Sede Manizales</h2>
+                
+                <div class="alert-box">
+                    <strong>Conclusión Inequívoca:</strong> La gestión actual se caracteriza por una <strong>opacidad administrativa 
+                    sistemática</strong>, un <strong>desconocimiento de los órganos de gobierno democrático</strong> y una 
+                    <strong>presunta negligencia</strong> en la gestión de fondos públicos y la protección del patrimonio institucional.
+                </div>
+
+                <h3 class="section-subtitle">1. Patrón de Opacidad y Evasión (Validado Judicialmente)</h3>
+                
+                <p>La Representación Profesoral tuvo que recurrir a la acción de tutela en múltiples ocasiones, no por diferencias 
+                de opinión, sino por la negativa persistente de las directivas a entregar información pública y esencial para la veeduría.</p>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso DAMA (Tutela 1)</h4>
+                    <p>Se solicitó información básica de gestión: Plan de Acción, talento humano y gestión de recursos. 
+                    La respuesta fue evasiva y se negó a incluir al personal contratista.</p>
+                    <p style="margin-top: 1rem;"><strong>Fallo del 26 de mayo de 2025:</strong> AMPARÓ el derecho y ordenó a la 
+                    Directora entregar la información, validando judicialmente que la administración estaba ocultando información.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso DIMA (Tutela 2)</h4>
+                    <p>Se solicitó información similar, incluyendo los indicadores de gestión de propiedad intelectual. 
+                    La respuesta fue igualmente incompleta.</p>
+                    <p style="margin-top: 1rem;"><strong>Fallo del 20 de junio de 2025:</strong> AMPARÓ nuevamente el derecho y 
+                    ordenó al Director entregar la información faltante.</p>
+                </div>
+
+                <div class="danger-box">
+                    <strong>Postura:</strong> La transparencia no es opcional. El hecho de que la Representación Profesoral deba 
+                    ganar tutelas para acceder a documentos tan básicos como un Plan de Acción demuestra un profundo desdén por 
+                    la rendición de cuentas.
+                </div>
+
+                <h3 class="section-subtitle">2. Cuestionamientos Éticos y Posible Conflicto de Interés</h3>
+                
+                <p>La veeduría encontró indicios de direccionamiento en el uso de recursos públicos, violando el principio de mérito.</p>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso Convocatorias GIPEM</h4>
+                    <p>Se denunció formalmente que DIMA estaba publicando convocatorias para estudiantes auxiliares con requisitos 
+                    cerrados que presuntamente solo podían ser cumplidos por miembros del grupo de investigación GIPEM.</p>
+                    <p style="margin-top: 1rem;"><strong>Agravante:</strong> La directora de este grupo de investigación (GIPEM) 
+                    es la propia Vicerrectora de Sede, Prof. Belizza Janet Ruiz.</p>
+                </div>
+
+                <div class="danger-box">
+                    <strong>Postura:</strong> Es éticamente inadmisible que las convocatorias financiadas con recursos públicos 
+                    de la Sede parezcan estar diseñadas para beneficiar directamente al grupo de investigación de la máxima 
+                    autoridad de la misma Sede. Esto configura un posible conflicto de interés que debe ser investigado.
+                </div>
+
+                <h3 class="section-subtitle">3. Desconocimiento de la Gobernanza y la Participación</h3>
+                
+                <p>La administración ha impuesto proyectos estratégicos ignorando los mandatos de la comunidad académica y los 
+                órganos de gobierno.</p>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso FCHS</h4>
+                    <ul class="styled-list">
+                        <li>La Representación presentó 15 objeciones técnicas y financieras rigurosas</li>
+                        <li>La Asamblea Profesoral dio un aval condicionado a que se resolvieran estas preocupaciones</li>
+                        <li>La administración incumplió este mandato y excluyó a la Representación del debate en el Consejo Académico</li>
+                        <li>Se denunció una inconsistencia de <strong>$7 mil millones de pesos</strong> entre presupuestos</li>
+                    </ul>
+                    <div class="alert-box" style="margin-top: 1rem;">
+                        <strong>Estado Actual (Octubre 2025):</strong> Los concursos docentes para la FCHS se encuentran congelados. 
+                        El motivo es la falta de los Proyectos Educativos del Programa (PEP), tal como lo advirtió esta Representación 
+                        en febrero.
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso MECUN</h4>
+                    <p>La Representación se abstuvo de participar denunciando falta de garantías y "presunta irregularidad en la 
+                    financiación".</p>
+                    <p style="margin-top: 1rem;">Esta irregularidad se confirma con la respuesta oficial que manifiesta que 
+                    <em>"no es necesario expedir un concepto jurídico o presupuestal para su financiación y ejecución"</em>, 
+                    validando el uso de fondos de funcionamiento sin un proyecto BPUN.</p>
+                </div>
+
+                <div class="danger-box">
+                    <strong>Postura:</strong> La administración confunde "socializar" con "imponer". Se ha violado el mandato de 
+                    la Asamblea Profesoral y se han desconocido las instancias de representación, creando una crisis de gobernabilidad.
+                </div>
+
+                <h3 class="section-subtitle">4. Presunta Negligencia Fiscal y Administrativa</h3>
+                
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso Aulas STEAM</h4>
+                    <p>Se alertó que en una sesión de control político en el Concejo de Manizales, se denunció públicamente la 
+                    <strong>"presunta no ejecución"</strong> por parte de la Sede de los fondos de la "Estampilla Pro-universidad".</p>
+                </div>
+
+                <div class="danger-box">
+                    <strong>Gravedad:</strong> Estos fondos tienen una destinación específica (Aulas STEAM) y su presunta no 
+                    ejecución no solo es un incumplimiento con la región, sino que expone a la Sede a "implicaciones administrativas 
+                    y fiscales de una seriedad incalculable".
+                </div>
+
+                <h3 class="section-subtitle">5. Creación de un Clima de Temor</h3>
+                
+                <div class="danger-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem; color: #ff0000;">Esta es la conclusión más grave</h4>
+                    <p>La administración no solo ha fallado en proteger el patrimonio público, sino que ha intimidado a quienes 
+                    ejercen la veeduría.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Caso Toma 2024</h4>
+                    <ul class="styled-list">
+                        <li>Tras los graves daños y hurtos ($35 millones), la administración interpuso denuncias contra "indeterminados"</li>
+                        <li>Se exigió ampliar la denuncia, dado que la administración conoce la identidad de los responsables</li>
+                        <li>En el Consejo de Sede del 24 de septiembre, al manifestar el "temor generalizado" de la comunidad, 
+                        la Vicerrectora respondió de forma intimidante</li>
+                    </ul>
+                </div>
+
+                <div class="danger-box" style="margin-top: 1rem;">
+                    <strong>Respuesta de la Vicerrectora:</strong> Sugirió que la representante "debía proteger su vida" y 
+                    "evaluar su cargo como representante". Esta respuesta fue tan grave que se omitió deliberadamente del borrador 
+                    del acta oficial.
+                </div>
+
+                <div class="alert-box" style="margin-top: 1rem;">
+                    <strong>Acción Legal Resultante:</strong> Se interpuso Acción de Tutela por el derecho a la Seguridad Personal 
+                    contra la Vicerrectora, la Fiscalía y la Defensoría del Pueblo.
+                </div>
+
+                <h3 class="section-subtitle">6. Conclusión del Análisis</h3>
+                
+                <div class="highlight-box">
+                    La Sede Manizales atraviesa una <strong>crisis de gobernabilidad, transparencia y ética administrativa</strong>. 
+                    Las respuestas evasivas, la exclusión del disenso, los posibles conflictos de interés y la intimidación directa 
+                    no son hechos aislados, sino un <strong>modus operandi</strong> de la actual administración.
+                </div>
+            </div>
+
+            <!-- PROCESOS EN SEGUIMIENTO -->
+            <div id="procesos" class="section">
+                <h2 class="section-title">Procesos Críticos en Seguimiento</h2>
+                
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Se mantienen seis frentes de alta importancia abiertos que requieren seguimiento continuo:
+                </p>
+
+                <div class="proceso-item">
+                    <div class="proceso-title">1. Tutela vs CSU por financiación irregular de MECUN</div>
+                    <div class="proceso-status">EN CURSO</div>
+                    <p>Acción de Tutela contra el Consejo Superior Universitario por vulnerar el derecho de petición al no 
+                    responder sobre la fuente de financiación de la Mesa Constituyente.</p>
+                    <p style="margin-top: 0.5rem;"><strong>Irregularidad:</strong> Uso de fondos de funcionamiento sin proyecto 
+                    BPUN registrado, violando el Acuerdo 037 de 2010 CSU.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <div class="proceso-title">2. Tutela por Seguridad Personal</div>
+                    <div class="proceso-status">EN CURSO</div>
+                    <p>Acción de amparo para la protección personal de la representante y solicitud a la Defensoría del Pueblo 
+                    de crear un canal seguro para denunciantes.</p>
+                    <p style="margin-top: 0.5rem;"><strong>Motivo:</strong> Respuesta intimidante de la Vicerrectora sugiriendo 
+                    que la representante "debía proteger su vida".</p>
+                </div>
+
+                <div class="proceso-item">
+                    <div class="proceso-title">3. Denuncia de hostigamiento contra el Decano de FCHS</div>
+                    <div class="proceso-status">SIN RESPUESTA</div>
+                    <p>Denuncia formal presentada en enero 2025 por hostigamiento y persecución.</p>
+                    <p style="margin-top: 0.5rem;"><strong>Estado:</strong> La Vicerrectoría de Sede no ha dado respuesta ni 
+                    trámite a la denuncia, situación agravada con el posterior nombramiento del profesor denunciado.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <div class="proceso-title">4. Seguimiento a la sostenibilidad de la FCHS</div>
+                    <div class="proceso-status">VALIDACIÓN DE VEEDURÍA</div>
+                    <p>Monitoreo de los concursos docentes y desarrollo de la nueva facultad.</p>
+                    <p style="margin-top: 0.5rem;"><strong>Estado Actual:</strong> Los concursos se encuentran congelados por 
+                    falta de los PEP de las dos carreras nuevas, tal como advirtió la Representación en febrero.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <div class="proceso-title">5. Veeduría sobre denuncias penales de la Toma 2024</div>
+                    <div class="proceso-status">EN SEGUIMIENTO</div>
+                    <p>Seguimiento a los procesos penales por hurto y daño en bien público ($35 millones).</p>
+                    <p style="margin-top: 0.5rem;"><strong>NUNC:</strong> 170016000256202415970 y 170016000256202413807</p>
+                    <p style="margin-top: 0.5rem;"><strong>Exigencia:</strong> Que la administración amplíe la denuncia e identifique 
+                    a los responsables conocidos.</p>
+                </div>
+
+                <div class="proceso-item">
+                    <div class="proceso-title">6. Veeduría sobre presunta no ejecución de fondos STEAM</div>
+                    <div class="proceso-status">ALERTA MÁXIMA</div>
+                    <p>Seguimiento a la presunta no ejecución de los fondos de destinación específica de la "Estampilla Pro-universidad".</p>
+                    <p style="margin-top: 0.5rem;"><strong>Gravedad:</strong> Esta situación podría tener implicaciones 
+                    administrativas y fiscales de una seriedad incalculable.</p>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 3rem;">
+                    Estos seis procesos demuestran que la labor de veeduría no termina con los logros obtenidos. 
+                    La Representación Profesoral mantiene un <strong>seguimiento activo y riguroso</strong> de todos los 
+                    frentes críticos para la transparencia y la defensa del estamento.
+                </div>
+            </div>
+
+            <!-- CONCLUSIONES -->
+            <div id="conclusiones" class="section">
+                <h2 class="section-title">Conclusiones e Insumos para Acciones Futuras</h2>
+                
+                <div class="highlight-box">
+                    El análisis de estos patrones demuestra que la Sede Manizales atraviesa una <strong>crisis de gobernabilidad, 
+                    transparencia y ética administrativa</strong>. Las respuestas evasivas, la exclusión del disenso, los posibles 
+                    conflictos de interés y la intimidación directa no son hechos aislados, sino un <strong>modus operandi</strong> 
+                    de la actual administración.
+                </div>
+
+                <h3 class="section-subtitle">Balance del Periodo 2024-2025</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-box" style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Acciones<br>Documentadas</span>
+                    </div>
+                    <div class="stat-box" style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Victorias<br>Concretas</span>
+                    </div>
+                    <div class="stat-box" style="background: linear-gradient(135deg, #94b43b 0%, #7a9530 100%); color: #1a3020;">
+                        <span class="stat-number" style="color: #1a3020;">6</span>
+                        <span class="stat-label">Procesos<br>en Seguimiento</span>
+                    </div>
+                </div>
+
+                <h3 class="section-subtitle">Diagnóstico Integral de la Crisis Institucional</h3>
+
+                <p style="font-size: 1.05rem; line-height: 1.8; margin: 1.5rem 0;">
+                    El periodo 2024-2025 ha evidenciado una crisis estructural en la Sede Manizales que trasciende las 
+                    irregularidades administrativas puntuales. Lo que esta Representación Profesoral ha documentado es un 
+                    <strong>patrón sistemático de conductas</strong> que erosionan los principios fundamentales de la 
+                    gobernanza universitaria: transparencia, participación democrática, uso ético de recursos públicos 
+                    y respeto por las instancias de representación.
+                </p>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Dimensión Legal y Judicial</h4>
+                    <p>La necesidad de interponer <strong>cuatro acciones de tutela</strong> en un solo año académico para 
+                    acceder a información básica de gestión no es un dato anecdótico: es la evidencia de que la administración 
+                    ha convertido la <strong>opacidad en política institucional</strong>. Todas las tutelas fueron aceptadas: 
+                    2 fueron falladas a nuestro favor, y las otras dos fueron solucionadas en los requerimientos de los jueces, 
+                    nunca se nos negó una tutela. Esto constituye un reconocimiento judicial explícito de que la administración 
+                    violó derechos fundamentales.</p>
+                    <p style="margin-top: 1rem;">Esta validación judicial no solo reivindica la labor de veeduría, sino que 
+                    establece un precedente jurídico que obliga a la administración a modificar sus prácticas. El hecho de que 
+                    ambos directores (DAMA y DIMA) fueran separados de sus cargos tras estas acciones confirma la gravedad de 
+                    las irregularidades detectadas.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Dimensión Ética y Conflictos de Interés</h4>
+                    <p>El caso de las convocatorias presuntamente direccionadas hacia el grupo de investigación GIPEM, dirigido 
+                    por la Vicerrectora de Sede, representa una <strong>violación al principio de mérito</strong> y plantea 
+                    serias dudas sobre la imparcialidad en el uso de recursos públicos. Este tipo de prácticas no solo afecta 
+                    la confianza en la institución, sino que configura posibles faltas disciplinarias que deben ser investigadas 
+                    por los órganos de control.</p>
+                    <p style="margin-top: 1rem;">La falta de respuesta institucional ante estas denuncias sugiere que no existen 
+                    mecanismos internos efectivos de control ético, o que estos están capturados por la misma administración 
+                    que debería ser fiscalizada.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Dimensión Democrática y de Gobernanza</h4>
+                    <p>El caso de la creación de la FCHS es paradigmático de cómo la administración desconoce las instancias 
+                    de gobierno y participación. La Asamblea Profesoral, máxima instancia del estamento, estableció condiciones 
+                    claras para su aval. Estas condiciones fueron sistemáticamente ignoradas:</p>
+                    <ul class="styled-list" style="margin-top: 1rem;">
+                        <li>Se excluyó a la Representación de las reuniones clave</li>
+                        <li>Se presionó la votación sin resolver las objeciones técnicas</li>
+                        <li>Se detectó una inconsistencia de $7 mil millones en los presupuestos</li>
+                        <li>Los concursos docentes están ahora congelados por falta de PEP, validando las advertencias de febrero</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Este patrón demuestra que la administración privilegia la imposición vertical 
+                    sobre la construcción democrática, poniendo en riesgo la viabilidad misma de proyectos estratégicos por 
+                    falta de planeación rigurosa.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Dimensión Fiscal y Administrativa</h4>
+                    <p>La presunta no ejecución de los fondos de la Estampilla Pro-universidad constituye la irregularidad 
+                    más grave en términos de impacto regional y responsabilidad fiscal. Estos recursos de destinación específica 
+                    representan un compromiso con el territorio que, de no cumplirse, no solo afecta a la Sede sino que 
+                    compromete la relación de la Universidad con Manizales y Caldas.</p>
+                    <p style="margin-top: 1rem;">El caso de la financiación irregular de la MECUN (uso de fondos de funcionamiento 
+                    sin proyecto BPUN) evidencia un <strong>desprecio por el marco normativo presupuestal</strong> que la misma 
+                    Universidad ha establecido. La respuesta oficial admitiendo que "no es necesario expedir un concepto jurídico 
+                    o presupuestal" es, en sí misma, una confesión de irregularidad.</p>
+                </div>
+
+                <div class="danger-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem; color: #c62828;">Dimensión de Seguridad e Intimidación</h4>
+                    <p>La intimidación directa a la Representación Profesoral por parte de la Vicerrectora, sugiriendo que 
+                    "debía proteger su vida" y "evaluar su cargo", representa el nivel más grave de deterioro institucional. 
+                    Esta conducta no solo violenta la libertad de expresión y el ejercicio de la representación, sino que 
+                    <strong>crea un clima de temor</strong> que silencia el disenso y protege la impunidad.</p>
+                    <p style="margin-top: 1rem;">El hecho de que esta amenaza fuera omitida del acta oficial del Consejo de Sede 
+                    demuestra una voluntad deliberada de ocultar estas conductas. La necesidad de acudir a la Defensoría del 
+                    Pueblo y a la justicia para garantizar la seguridad personal de los representantes es un síntoma de la 
+                    gravedad de la crisis.</p>
+                </div>
+
+                <h3 class="section-subtitle">Lecciones Aprendidas del Ejercicio de Veeduría</h3>
+
+                <div class="success-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">1. La Persistencia da Resultados</h4>
+                    <p>Las seis victorias concretas demuestran que la veeduría rigurosa y persistente produce cambios tangibles. 
+                    El cierre de la mesa de PTA, la apertura de los proyectos de investigación de FIA, las victorias judiciales 
+                    y la separación de los directores de DAMA y DIMA son evidencia de que el ejercicio responsable de la 
+                    representación transforma realidades.</p>
+                </div>
+
+                <div class="success-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">2. La Documentación es Fundamental</h4>
+                    <p>Cada petición, cada comunicado, cada denuncia documentada se ha convertido en una pieza de evidencia 
+                    que sustenta las acciones legales y las denuncias públicas. La meticulosidad en el registro de las 
+                    irregularidades ha sido clave para ganar las tutelas y fundamentar las denuncias ante los órganos de control.</p>
+                </div>
+
+                <div class="success-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">3. La Acción Legal es Necesaria</h4>
+                    <p>Cuando la administración se niega sistemáticamente a responder, la vía judicial se convierte en el único 
+                    mecanismo efectivo para garantizar los derechos fundamentales. Las cuatro tutelas interpuestas no fueron 
+                    una estrategia de confrontación, sino una necesidad ante el cierre de todos los canales institucionales.</p>
+                </div>
+
+                <div class="success-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">4. La Comunicación con el Estamento es Vital</h4>
+                    <p>Los siete comunicados públicos han mantenido informado al profesorado y han generado respaldo para las 
+                    acciones de veeduría. La transparencia hacia el estamento representado es un deber ético que fortalece la 
+                    legitimidad de las acciones emprendidas.</p>
+                </div>
+
+                <h3 class="section-subtitle">Recomendaciones y Acciones Futuras</h3>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">1. Escalar a Órganos de Control Externos</h4>
+                    <p><strong>Procuraduría General de la Nación:</strong></p>
+                    <ul class="styled-list">
+                        <li>Denunciar las presuntas faltas disciplinarias en el caso GIPEM (conflicto de interés)</li>
+                        <li>Denunciar la intimidación directa a representantes (conducta que afecta el ejercicio de la función pública)</li>
+                        <li>Solicitar investigación por el desconocimiento sistemático de las instancias de gobierno</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Contraloría General de la República:</strong></p>
+                    <ul class="styled-list">
+                        <li>Denunciar la presunta no ejecución de los fondos de Estampilla Pro-universidad</li>
+                        <li>Solicitar auditoría sobre la financiación irregular de la MECUN</li>
+                        <li>Pedir revisión de la ejecución presupuestal de la creación de la FCHS</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">2. Fortalecer las Acciones Judiciales en Curso</h4>
+                    <ul class="styled-list">
+                        <li><strong>Tutela por Seguridad Personal:</strong> Hacer seguimiento estricto y exigir a la Defensoría 
+                        del Pueblo la creación inmediata del canal seguro para denunciantes</li>
+                        <li><strong>Tutela vs CSU (MECUN):</strong> Preparar evidencia documental robusta sobre las irregularidades 
+                        en la financiación</li>
+                        <li><strong>Denuncias penales por la toma:</strong> Insistir en que la administración identifique a los 
+                        responsables conocidos y no se conforme con denuncias contra "indeterminados"</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">3. Elevar Informes Consolidados al CSU</h4>
+                    <p>Presentar ante el Consejo Superior Universitario un informe integral que documente:</p>
+                    <ul class="styled-list">
+                        <li>El patrón sistemático de opacidad administrativa (validado por cuatro tutelas aceptadas, ninguna negada)</li>
+                        <li>Los posibles conflictos de interés en el uso de recursos públicos</li>
+                        <li>El desconocimiento de las instancias de gobierno democrático</li>
+                        <li>Las presuntas irregularidades fiscales</li>
+                        <li>La intimidación a representantes y la creación de un clima de temor</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Este informe debe incluir la solicitud formal de una auditoría externa a la 
+                    gestión de la Vicerrectoría de Sede, dada la gravedad de las irregularidades detectadas.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">4. Fortalecer la Organización del Estamento Profesoral</h4>
+                    <ul class="styled-list">
+                        <li>Convocar una nueva Asamblea Profesoral para evaluar la situación actual y definir posiciones 
+                        colectivas sobre los temas críticos</li>
+                        <li>Crear una red de comunicación permanente con el profesorado para mantenerlo informado en tiempo real</li>
+                        <li>Establecer comisiones de trabajo temáticas (académica, presupuestal, clima laboral) para profundizar 
+                        la veeduría en áreas específicas</li>
+                        <li>Coordinar acciones con las representaciones profesorales de otras sedes para escalar denuncias de 
+                        interés nacional</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">5. Monitoreo Continuo de Procesos Críticos</h4>
+                    <p>Mantener seguimiento activo sobre:</p>
+                    <ul class="styled-list">
+                        <li><strong>FCHS:</strong> Verificar que se cumplan los PEP antes de iniciar concursos, monitorear la 
+                        ejecución presupuestal y exigir informes de avance trimestrales</li>
+                        <li><strong>Aulas STEAM:</strong> Solicitar cronograma de ejecución de los fondos de Estampilla y 
+                        establecer veeduría ciudadana en coordinación con el Concejo de Manizales</li>
+                        <li><strong>Clima Laboral:</strong> Realizar encuestas periódicas al profesorado sobre percepción de 
+                        clima laboral y libertad académica</li>
+                        <li><strong>Procesos Penales:</strong> Solicitar informes mensuales sobre el avance de las denuncias por 
+                        la toma de 2024</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">6. Visibilizar Logros y Mantener Comunicación Constante</h4>
+                    <ul class="styled-list">
+                        <li>Publicar informes trimestrales de gestión para mantener al profesorado informado</li>
+                        <li>Utilizar diferentes canales de comunicación (correo, redes sociales, asambleas) para llegar a todo 
+                        el estamento</li>
+                        <li>Documentar y celebrar cada victoria, por pequeña que sea, para demostrar que la veeduría funciona</li>
+                        <li>Crear una línea de tiempo pública y accesible donde se registren todas las acciones y sus resultados</li>
+                    </ul>
+                </div>
+
+                <h3 class="section-subtitle">Reflexión Final: El Ejercicio de la Representación como Defensa de lo Público</h3>
+                
+                <div class="highlight-box" style="text-align: left;">
+                    <p style="font-size: 1.15rem; line-height: 1.9; margin-bottom: 1.5rem;">
+                        La labor de la Representación Profesoral en el periodo 2024-2025 ha sido mucho más que el ejercicio 
+                        formal de un cargo: ha sido una <strong>defensa constante de los principios fundamentales de la 
+                        Universidad Pública</strong>. La transparencia no es una cortesía administrativa, es un derecho. La 
+                        participación democrática no es un trámite, es la esencia de la gobernanza universitaria. El uso ético 
+                        de los recursos públicos no es una opción, es una obligación constitucional.
+                    </p>
+                    <p style="font-size: 1.15rem; line-height: 1.9; margin-bottom: 1.5rem;">
+                        Las <strong>seis victorias concretas</strong> obtenidas demuestran que cuando la representación se ejerce 
+                        con rigor, persistencia y fundamentación, se producen cambios reales que benefician al estamento y a la 
+                        institución. Cada proyecto de investigación desbloqueado, cada director removido por mal desempeño, cada 
+                        tutela ganada, es una reivindicación del poder de la veeduría ciudadana dentro de la universidad.
+                    </p>
+                    <p style="font-size: 1.15rem; line-height: 1.9; margin-bottom: 1.5rem;">
+                        Sin embargo, los <strong>seis procesos críticos en seguimiento</strong> nos recuerdan que la labor está 
+                        lejos de terminar. La crisis institucional que atraviesa la Sede Manizales no se resolverá con cambios 
+                        cosméticos o con el relevo de funcionarios. Requiere una transformación profunda de la cultura 
+                        administrativa, el fortalecimiento de los mecanismos de control interno y, sobre todo, el respeto genuino 
+                        por las instancias de gobierno democrático.
+                    </p>
+                    <p style="font-size: 1.15rem; line-height: 1.9; margin-bottom: 1.5rem;">
+                        El camino hacia esa transformación pasa necesariamente por <strong>escalar las denuncias a los órganos 
+                        externos de control</strong>. Cuando la administración es la fuente del problema, los mecanismos internos 
+                        son insuficientes. La Procuraduría y la Contraloría deben intervenir para investigar las irregularidades 
+                        éticas, disciplinarias y fiscales documentadas. Solo una intervención externa puede garantizar 
+                        imparcialidad y restaurar la confianza institucional.
+                    </p>
+                    <p style="font-size: 1.15rem; line-height: 1.9;">
+                        Esta rendición de cuentas es, ante todo, un <strong>llamado a la acción</strong>. Al profesorado: para 
+                        que se apropie de su poder como estamento y exija transparencia. A la administración: para que comprenda 
+                        que la opacidad tiene costos institucionales, judiciales y reputacionales. A los órganos de control: 
+                        para que cumplan su función de garantes de la legalidad. Y a la comunidad universitaria en general: para 
+                        que defienda la Universidad Pública como un bien común que debe ser protegido, fiscalizado y mejorado 
+                        constantemente.
+                    </p>
+                </div>
+
+                <div class="alert-box" style="text-align: center; margin-top: 3rem; font-size: 1.2rem; line-height: 1.8;">
+                    <strong>La veeduría continúa. La defensa de lo público no descansa.</strong><br>
+                    <em style="font-size: 1rem; display: block; margin-top: 1rem;">
+                        Representación Profesoral - Sede Manizales<br>
+                        Octubre 2025
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-title">ELABORADO POR:</div>
+            <div class="footer-content">
+                <strong>IVETH KATHERINE COLLAZOS SILVA</strong><br>
+                <strong>VICTORIA EUGENIA VALENCIA MAYA</strong><br>
+                Representantes Profesorales al Consejo de Sede de Manizales
+            </div>
+            <div class="footer-meta">
+                Universidad Nacional de Colombia - Sede Manizales<br>
+                Octubre 2025<br>
+                <br>
+                Rendición de Cuentas 2024-2025
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Desactivar todos los botones
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+            
+            // Scroll al inicio del contenido
+            document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
