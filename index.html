@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Informe de Rendición de Cuentas 2024-2025 de la Representación Profesoral ante el Consejo de Sede Manizales - Universidad Nacional de Colombia.">
     <title>Rendición de Cuentas - Representación Profesoral Sede Manizales | UNAL</title>
     
     <!-- Ancizar Sans Font -->
@@ -12,6 +13,7 @@
             src: url('https://github.com/cbellom/UNViewer/raw/master/Assets/Fonts/Fuente%20Ancizar%204.0/Ancizar%20Sans-Bold%20Italic.otf') format('opentype');
             font-weight: 700;
             font-style: italic;
+            font-display: swap;
         }
         
         @font-face {
@@ -19,18 +21,37 @@
             src: url('https://github.com/cbellom/UNViewer/raw/master/Assets/Fonts/Fuente%20Ancizar%204.0/Ancizar%20Sans-Regular.otf') format('opentype');
             font-weight: 400;
             font-style: normal;
+            font-display: swap;
         }
         
+        :root {
+            --unal-green-light: #94b43b;
+            --unal-green-medium: #466b3f;
+            --unal-green-dark: #1a3020;
+            --unal-yellow: #f9a825;
+            --unal-red: #ff5252;
+            --bg-color: #f5f5f5;
+            --text-color: #1E1E1E;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* FORZAR TIPOGRAFÍA ANCIZAR EN TODO EL DOCUMENTO */
+        body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, .nav-btn {
+            font-family: 'Ancizar Sans', sans-serif !important;
+        }
+
         body {
-            font-family: 'Ancizar Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f5f5;
-            color: #1E1E1E;
+            background: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
@@ -40,32 +61,28 @@
             padding: 20px;
         }
 
-        /* Colores UNAL - Paleta Oficial Correcta */
-        .unal-verde-claro { background: #94b43b; } /* Pantone 376 C - para boxes */
-        .unal-verde-oscuro { background: #466b3f; } /* Pantone 7743 C - elementos intermedios */
-        .unal-verde-muy-oscuro { background: #1a3020; } /* Verde casi negro - líneas y separadores */
-        .unal-amarillo { background: #f9a825; }
-        .unal-negro { background: #1E1E1E; }
-        
         /* Header */
         .header {
-            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            background: linear-gradient(135deg, var(--unal-green-medium) 0%, var(--unal-green-dark) 100%);
             color: white;
             padding: 3rem;
             margin-bottom: 2rem;
-            border-top: 8px solid #94b43b;
-            border-bottom: 8px solid #94b43b;
+            border-top: 8px solid var(--unal-green-light);
+            border-bottom: 8px solid var(--unal-green-light);
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .header h1 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .header .subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.95;
             margin-bottom: 0.5rem;
         }
 
@@ -73,13 +90,14 @@
             font-size: 1.1rem;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 2px solid rgba(255,255,255,0.3);
+            border-top: 1px solid rgba(255,255,255,0.3);
         }
 
         .header .period {
             font-size: 0.95rem;
             opacity: 0.8;
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
+            font-style: italic;
         }
 
         /* Navegación */
@@ -89,32 +107,40 @@
             margin-bottom: 2rem;
             background: white;
             padding: 1rem;
-            border: 3px solid #1a3020;
+            border: 1px solid var(--unal-green-dark);
+            border-radius: 8px;
             flex-wrap: wrap;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .nav-btn {
             flex: 1 1 auto;
             min-width: 150px;
             padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            background: linear-gradient(135deg, var(--unal-green-medium) 0%, var(--unal-green-dark) 100%);
             color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            font-family: 'Ancizar Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
         .nav-btn:hover {
-            background: #1a3020;
+            background: var(--unal-green-dark);
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .nav-btn.active {
-            background: #94b43b;
-            color: #1a3020;
+            background: var(--unal-green-light);
+            color: var(--unal-green-dark);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         /* Contenido */
@@ -122,7 +148,8 @@
             background: white;
             padding: 3rem;
             min-height: 600px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
 
         .section {
@@ -131,7 +158,7 @@
 
         .section.active {
             display: block;
-            animation: fadeIn 0.4s;
+            animation: fadeIn 0.4s ease-out;
         }
 
         @keyframes fadeIn {
@@ -142,8 +169,8 @@
         .section-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #1a3020;
-            border-bottom: 4px solid #1a3020;
+            color: var(--unal-green-dark);
+            border-bottom: 4px solid var(--unal-green-dark);
             padding-bottom: 1rem;
             margin-bottom: 2rem;
         }
@@ -151,42 +178,41 @@
         .section-subtitle {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1a3020;
-            margin: 2rem 0 1rem 0;
+            color: var(--unal-green-dark);
+            margin: 2.5rem 0 1.5rem 0;
         }
 
         /* Cajas informativas */
-        .info-box {
-            background: linear-gradient(135deg, #e8f4dc 0%, #d4e8c1 100%);
-            border-left: 6px solid #1a3020;
+        .info-box, .alert-box, .success-box, .danger-box {
             padding: 1.5rem;
             margin: 1.5rem 0;
-            color: #1a3020;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e8f4dc 0%, #d4e8c1 100%);
+            border-left: 6px solid var(--unal-green-dark);
+            color: var(--unal-green-dark);
         }
 
         .alert-box {
-            background: linear-gradient(135deg, #94b43b 0%, #7a9530 100%);
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 4px solid #1a3020;
+            background: linear-gradient(135deg, var(--unal-green-light) 0%, #7a9530 100%);
+            border: 2px solid var(--unal-green-dark);
+            color: var(--unal-green-dark);
             font-weight: 600;
-            font-size: 1.1rem;
-            color: #1a3020;
         }
 
         .success-box {
             background: linear-gradient(135deg, #c8e6a0 0%, #b8dc8e 100%);
-            border-left: 6px solid #1a3020;
-            padding: 2rem;
-            margin: 2rem 0;
-            color: #1a3020;
+            border-left: 6px solid var(--unal-green-dark);
+            color: var(--unal-green-dark);
         }
 
         .danger-box {
             background: #ffebee;
-            border: 4px solid #ff0000;
-            padding: 2rem;
-            margin: 2rem 0;
+            border: 2px solid var(--unal-red);
+            color: #b71c1c;
         }
 
         /* Stats boxes */
@@ -198,12 +224,17 @@
         }
 
         .stat-box {
-            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            background: linear-gradient(135deg, var(--unal-green-medium) 0%, var(--unal-green-dark) 100%);
             color: white;
             padding: 2rem;
             text-align: center;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
         }
 
         .stat-number {
@@ -211,7 +242,8 @@
             font-weight: 700;
             display: block;
             margin-bottom: 0.5rem;
-            color: #94b43b;
+            color: var(--unal-green-light);
+            line-height: 1;
         }
 
         .stat-label {
@@ -222,43 +254,53 @@
 
         /* Timeline */
         .timeline-item {
-            border-left: 4px solid #1a3020;
+            border-left: 4px solid var(--unal-green-dark);
             padding-left: 2rem;
             margin-left: 1rem;
-            padding-bottom: 2rem;
+            padding-bottom: 2.5rem;
             position: relative;
+        }
+
+        .timeline-item:last-child {
+            border-left: 4px solid transparent;
         }
 
         .timeline-item::before {
             content: '';
             width: 20px;
             height: 20px;
-            background: #94b43b;
+            background: var(--unal-green-light);
             border: 4px solid white;
             border-radius: 50%;
             position: absolute;
             left: -12px;
             top: 0;
-            box-shadow: 0 0 0 4px #1a3020;
+            box-shadow: 0 0 0 4px var(--unal-green-dark);
         }
 
         .timeline-date {
             font-weight: 700;
-            color: #466b3f;
+            color: var(--unal-green-medium);
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .timeline-content {
-            margin-top: 1rem;
+            background: #fcfcfc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .timeline-content strong {
-            color: #1a3020;
+            color: var(--unal-green-dark);
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            background: linear-gradient(135deg, var(--unal-green-medium) 0%, var(--unal-green-dark) 100%);
             color: white;
             padding: 2.5rem;
             margin: 2rem 0;
@@ -266,60 +308,48 @@
             text-align: center;
             line-height: 1.8;
             border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
-        .logro-badge {
+        /* Badges */
+        .badge {
             display: inline-block;
-            background: #94b43b;
-            color: #1a3020;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
             font-weight: 700;
-            font-size: 0.9rem;
-            margin: 0.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .accion-badge {
-            display: inline-block;
-            background: #f9a825;
-            color: #1a3020;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin: 0.25rem;
-        }
-
-        .legal-badge {
-            display: inline-block;
-            background: #ff5252;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin: 0.25rem;
-        }
+        .logro-badge { background: var(--unal-green-light); color: var(--unal-green-dark); }
+        .accion-badge { background: var(--unal-yellow); color: var(--unal-green-dark); }
+        .legal-badge { background: var(--unal-red); color: white; }
+        .veeduria-badge { background: #5c6bc0; color: white; }
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%);
+            background: linear-gradient(135deg, var(--unal-green-medium) 0%, var(--unal-green-dark) 100%);
             color: white;
-            padding: 2rem;
+            padding: 3rem 2rem;
             margin-top: 3rem;
             text-align: center;
+            border-radius: 4px;
         }
 
         .footer-title {
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: #94b43b;
+            color: var(--unal-green-light);
+            letter-spacing: 1px;
         }
 
         .footer-content {
             font-size: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             line-height: 1.8;
         }
 
@@ -327,8 +357,8 @@
             font-size: 0.9rem;
             opacity: 0.8;
             margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid rgba(148, 180, 59, 0.3);
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(148, 180, 59, 0.3);
         }
 
         /* List styling */
@@ -345,57 +375,77 @@
 
         ul.styled-list li::before {
             content: '▸';
-            color: #466b3f;
+            color: var(--unal-green-medium);
             font-weight: 700;
+            font-size: 1.2rem;
             position: absolute;
             left: 0.5rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .nav {
-                flex-direction: column;
-            }
-
-            .nav-btn {
-                width: 100%;
-            }
-
-            .content {
-                padding: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
+            top: 0.6rem;
         }
 
         .proceso-item {
             background: white;
-            border: 3px solid #1a3020;
+            border-left: 6px solid var(--unal-green-dark);
+            border-top: 1px solid #eee;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
             padding: 1.5rem;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            transition: transform 0.2s;
+        }
+        
+        .proceso-item:hover {
+            transform: translateX(5px);
         }
 
         .proceso-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #1a3020;
+            color: var(--unal-green-dark);
             margin-bottom: 0.5rem;
         }
 
         .proceso-status {
             display: inline-block;
             padding: 0.25rem 0.75rem;
-            background: #94b43b;
-            color: #1a3020;
+            background: var(--unal-green-light);
+            color: var(--unal-green-dark);
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
             margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav { 
+                flex-direction: column; 
+                position: static;
+            }
+            .nav-btn { width: 100%; margin-bottom: 0.2rem; }
+            .content { padding: 1.5rem; }
+            .section-title { font-size: 1.5rem; }
+            .stat-number { font-size: 2.5rem; }
+            .timeline-item { padding-left: 1rem; margin-left: 0.5rem; }
+            .timeline-item::before { left: -16px; }
+        }
+
+        /* Print styles */
+        @media print {
+            .nav, .nav-btn { display: none; }
+            .section { display: block !important; margin-bottom: 3rem; page-break-inside: avoid; }
+            .header { background: white; color: black; border: none; padding: 0; margin-bottom: 1rem; box-shadow: none; }
+            .header h1 { color: black; font-size: 20pt; }
+            .header .authors { color: black; border-top: 1px solid black; }
+            .container { max-width: 100%; padding: 0; }
+            .content { padding: 0; box-shadow: none; }
+            body { background: white; color: black; }
+            .stat-box, .highlight-box, .footer { background: white !important; color: black !important; border: 1px solid #ccc; box-shadow: none; }
+            .stat-number, .footer-title { color: black !important; }
+            a { text-decoration: none; color: black; }
         }
     </style>
 </head>
@@ -410,17 +460,17 @@
                 <strong>VICTORIA EUGENIA VALENCIA MAYA</strong><br>
                 Representantes Profesorales
             </div>
-            <div class="period">Periodo 2024-2025 | Actualizado: 31 de octubre de 2025</div>
+            <div class="period">Periodo 2024-2025 | Actualizado: Diciembre de 2025</div>
         </div>
 
         <!-- Navegación -->
         <div class="nav">
-            <button class="nav-btn active" onclick="showSection('resumen')">Resumen Ejecutivo</button>
-            <button class="nav-btn" onclick="showSection('timeline')">Línea de Tiempo Completa</button>
-            <button class="nav-btn" onclick="showSection('logros')">Logros y Victorias</button>
-            <button class="nav-btn" onclick="showSection('analisis')">Análisis de Situación</button>
-            <button class="nav-btn" onclick="showSection('procesos')">Procesos en Seguimiento</button>
-            <button class="nav-btn" onclick="showSection('conclusiones')">Conclusiones</button>
+            <button class="nav-btn active" onclick="showSection('resumen', this)">Resumen Ejecutivo</button>
+            <button class="nav-btn" onclick="showSection('timeline', this)">Línea de Tiempo Completa</button>
+            <button class="nav-btn" onclick="showSection('logros', this)">Logros y Victorias</button>
+            <button class="nav-btn" onclick="showSection('analisis', this)">Análisis de Situación</button>
+            <button class="nav-btn" onclick="showSection('procesos', this)">Procesos en Seguimiento</button>
+            <button class="nav-btn" onclick="showSection('conclusiones', this)">Conclusiones</button>
         </div>
 
         <!-- Contenido -->
@@ -489,16 +539,16 @@
             <!-- LÍNEA DE TIEMPO COMPLETA -->
             <div id="timeline" class="section">
                 <h2 class="section-title">Línea de Tiempo Completa (2024-2025)</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Cronología detallada de todas las acciones de veeduría, gestión y defensa del estamento profesoral</p>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Cronología detallada de todas las acciones de veeduría, gestión y defensa del estamento profesoral.</p>
 
-                <div style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%); color: #94b43b; padding: 1.5rem; margin: 2rem 0; text-align: center; font-size: 1.5rem; font-weight: 700;">
+                <div style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%); color: #94b43b; padding: 1rem; margin: 2rem 0; text-align: center; font-size: 1.3rem; font-weight: 700; border-radius: 4px;">
                     AÑO 2024
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">Mayo - Agosto 2024</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">ACCIÓN</span>
+                        <span class="badge accion-badge">ACCIÓN</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Acciones frente a la Toma del Campus</h4>
                         <p><strong>Acción:</strong> Tras la toma de las instalaciones (mayo-julio 2024), la administración interpone 
                         denuncias penales por hurto y daño en bien público, documentando pérdidas por <strong>$14.706.900</strong> 
@@ -512,9 +562,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">Septiembre 2024 - Septiembre 2025</div>
+                    <div class="timeline-date">Septiembre 2024 - Diciembre 2025</div>
                     <div class="timeline-content">
-                        <span class="logro-badge">LOGRO</span>
+                        <span class="badge logro-badge">LOGRO</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría por Proyectos de Investigación FIA</h4>
                         <p><strong>Acción:</strong> Acompañamiento exhaustivo a los profesores ganadores de la "Convocatoria de la 
                         Facultad de Ingeniería y Arquitectura 2024 para el Apoyo a Proyectos de Investigación", cuyos proyectos 
@@ -530,7 +580,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">1 de octubre de 2024</div>
                     <div class="timeline-content">
-                        <span class="logro-badge">LOGRO</span>
+                        <span class="badge logro-badge">LOGRO</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría sobre Carga Laboral Docente</h4>
                         <p><strong>Petición:</strong> Solicitud de información a la Dirección Académica sobre la conformación y 
                         metodología de la "mesa de estudio de los planes de trabajo académico (PTA)".</p>
@@ -544,7 +594,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">12 de noviembre de 2024</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">ACCIÓN</span>
+                        <span class="badge accion-badge">ACCIÓN</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Participación Institucional</h4>
                         <p><strong>Petición REP.PROF.008-2024:</strong> Se formaliza la delegación de la Representante Suplente, 
                         Prof. Victoria Eugenia Valencia Maya, para participar activamente ante el Comité de Extensión de Sede.</p>
@@ -558,7 +608,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">4 de diciembre de 2024</div>
                     <div class="timeline-content">
-                        <span class="logro-badge">LOGRO</span>
+                        <span class="badge logro-badge">LOGRO</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa del Clima Laboral</h4>
                         <p><strong>Petición REP.PROF.015-2024:</strong> Petición formal al Decano de la Facultad de Ingeniería 
                         y Arquitectura solicitando su intervención urgente en la Escuela de Arquitectura.</p>
@@ -571,14 +621,14 @@
                     </div>
                 </div>
 
-                <div style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%); color: #94b43b; padding: 1.5rem; margin: 3rem 0 2rem 0; text-align: center; font-size: 1.5rem; font-weight: 700;">
+                <div style="background: linear-gradient(135deg, #466b3f 0%, #1a3020 100%); color: #94b43b; padding: 1rem; margin: 3rem 0 2rem 0; text-align: center; font-size: 1.3rem; font-weight: 700; border-radius: 4px;">
                     AÑO 2025
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">Enero 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">DENUNCIA</span>
+                        <span class="badge accion-badge">DENUNCIA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Hostigamiento (Pre-FCHS)</h4>
                         <p><strong>Comunicado 001:</strong> Se presenta una denuncia formal por hostigamiento y persecución por parte 
                         del profesor que posteriormente sería nombrado Decano de la nueva FCHS.</p>
@@ -592,7 +642,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">3 de febrero de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">VEEDURÍA</span>
+                        <span class="badge veeduria-badge">VEEDURÍA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría Académica y Financiera (Creación FCHS)</h4>
                         <p><strong>Comunicado N.º 01:</strong> Ante la discusión de la creación de la Facultad de Ciencias Humanas 
                         y Sociales (FCHS), la Representación Profesoral presenta un documento público con <strong>15 objeciones 
@@ -609,7 +659,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">7 de febrero de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">ASAMBLEA</span>
+                        <span class="badge accion-badge">ASAMBLEA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Garantías de Participación Docente</h4>
                         <p><strong>Asamblea Profesoral:</strong> 71 asistentes debaten la creación de la FCHS.</p>
                         <div class="success-box" style="margin-top: 1rem;">
@@ -623,19 +673,19 @@
                 <div class="timeline-item">
                     <div class="timeline-date">11 de febrero de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">DENUNCIA</span>
+                        <span class="badge accion-badge">DENUNCIA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Incumplimiento de Acuerdos</h4>
                         <p><strong>Comunicado N.º 002:</strong> Se denuncia públicamente que, violando el compromiso de la Asamblea, 
                         la administración de la Sede agenda reuniones clave sobre la FCHS y el Plan Integral de Cobertura (PIC) con 
                         el Vicerrector General, excluyendo explícitamente a la Representación Profesoral de sede, a pesar de la solicitud
-                            de participación en el espacio.</p>
+                        de participación en el espacio.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">31 de marzo de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">VEEDURÍA</span>
+                        <span class="badge veeduria-badge">VEEDURÍA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Lucha contra Conflicto de Interés</h4>
                         <p><strong>Petición REP.PROF.020-2025:</strong> Solicitud de suspensión inmediata de la convocatoria de 
                         estudiante auxiliar DIMA_011-2025.</p>
@@ -648,7 +698,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">3 de abril de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">PETICIÓN</span>
+                        <span class="badge accion-badge">PETICIÓN</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Activación de Veeduría Masiva</h4>
                         <p><strong>Petición REP.PROF.022-2025:</strong> Petición de 10 puntos a la Directora Académica solicitando 
                         información crítica sobre: Plan de Acción, proyectos, ejecución presupuestal y gestión del talento humano.</p>
@@ -661,7 +711,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">12 de mayo de 2025</div>
                     <div class="timeline-content">
-                        <span class="legal-badge">TUTELA 1</span>
+                        <span class="badge legal-badge">TUTELA 1</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa Judicial del Derecho de Petición</h4>
                         <p><strong>Rad: ...2025-10120-00</strong></p>
                         <p>Se interpone Acción de Tutela contra la Directora Académica (Norma Ruiz) por vulnerar el derecho de 
@@ -672,7 +722,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">24 de mayo de 2025</div>
                     <div class="timeline-content">
-                        <span class="legal-badge">TUTELA 2</span>
+                        <span class="badge legal-badge">TUTELA 2</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa Judicial del Derecho de Petición</h4>
                         <p><strong>Rad: ...2025-00142-00</strong></p>
                         <p>Se interpone Acción de Tutela contra el Director de DIMA (Sandro Báez) por vulnerar el derecho de petición, 
@@ -683,7 +733,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">26 de mayo de 2025</div>
                     <div class="timeline-content">
-                        <span class="logro-badge">VICTORIA JUDICIAL</span>
+                        <span class="badge logro-badge">VICTORIA JUDICIAL</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Victoria en Tutela 1</h4>
                         <p><strong>Sentencia 117</strong> - Juzgado Tercero Municipal de Pequeñas Causas Laborales</p>
                         <div class="success-box" style="margin-top: 1rem;">
@@ -697,7 +747,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">5 de junio de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">DENUNCIA</span>
+                        <span class="badge accion-badge">DENUNCIA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Exclusión en Instancias Superiores</h4>
                         <p><strong>Comunicado N.º 003:</strong> Se denuncia públicamente que el Consejo Académico ignoró la solicitud 
                         formal de la Representación de Sede para asistir a la sesión donde se debatiría y votaría la creación de la FCHS.</p>
@@ -707,7 +757,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">18 de junio de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">DENUNCIA AL CSU</span>
+                        <span class="badge accion-badge">DENUNCIA AL CSU</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia por Hostigamiento Institucional</h4>
                         <p><strong>Comunicado N.º 005:</strong> Se dirige una comunicación al Consejo Superior Universitario (CSU) 
                         denunciando una "grave afectación al ejercicio de la representación" y un "hostigamiento institucional".</p>
@@ -720,7 +770,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">20 de junio de 2025</div>
                     <div class="timeline-content">
-                        <span class="logro-badge">VICTORIA JUDICIAL</span>
+                        <span class="badge logro-badge">VICTORIA JUDICIAL</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Victoria en Tutela 2</h4>
                         <p><strong>Sentencia 132</strong> - Juzgado Cuarto Penal Municipal</p>
                         <div class="success-box" style="margin-top: 1rem;">
@@ -734,7 +784,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">1 de julio de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">VEEDURÍA</span>
+                        <span class="badge veeduria-badge">VEEDURÍA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Denuncia de Irregularidades (FCHS)</h4>
                         <p><strong>Comunicado N.º 006 y 007:</strong> Se informa que el Consejo Académico avaló la FCHS "ignorando 
                         las disposiciones explícitas de la Asamblea Profesoral".</p>
@@ -748,7 +798,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">19 de septiembre de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">POSICIONAMIENTO POLÍTICO</span>
+                        <span class="badge accion-badge">POSICIONAMIENTO POLÍTICO</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Posicionamiento sobre MECUN</h4>
                         <p><strong>Petición CRPS.001-2025:</strong> El Comité de Representantes Profesorales de Manizales informa 
                         al CSU su decisión de abstenerse de postular una plancha para la Mesa Constituyente Universitaria (MECUN).</p>
@@ -760,20 +810,20 @@
                 <div class="timeline-item">
                     <div class="timeline-date">25 de septiembre de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">PETICIÓN</span>
+                        <span class="badge accion-badge">PETICIÓN</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Exigencia de Responsabilidad Penal</h4>
                         <p><strong>Petición REP.PROF.027-2025:</strong> Petición a la Vicerrectora exigiendo que la Sede impulse 
                         eficazmente las denuncias penales por la toma de 2024.</p>
-                        <p>Se señala que la administración se reunió con los </strong>"delegados de la toma"<strong>  y, por lo tanto, </strong>existen mecanismos
-                            y acciones que se podrían adelantar para la identificación de los implicados, por lo que la denuncia contra
-                            "indeterminados" es insuficiente, además de la falta de impulso procesal de las denuncias.</p>
+                        <p>Se señala que la administración se reunió con los <strong>"delegados de la toma"</strong> y, por lo tanto, <strong>existen mecanismos
+                        y acciones que se podrían adelantar para la identificación de los implicados</strong>, por lo que la denuncia contra
+                        "indeterminados" es insuficiente, además de la falta de impulso procesal de las denuncias.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">17 de octubre de 2025</div>
                     <div class="timeline-content">
-                        <span class="legal-badge">TUTELA 3</span>
+                        <span class="badge legal-badge">TUTELA 3</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Defensa Judicial (Financiación MECUN)</h4>
                         <p><strong>Rad: ...2025-00346-00</strong></p>
                         <p>Se interpone Acción de Tutela contra el CSU por vulnerar el derecho de petición, al no responder la 
@@ -784,7 +834,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">22 de octubre de 2025</div>
                     <div class="timeline-content">
-                        <span class="legal-badge">TUTELA 4</span>
+                        <span class="badge legal-badge">TUTELA 4</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Acción de Tutela por Intimidación</h4>
                         <p>Se interpone Acción de Tutela contra la Vicerrectora, la Fiscalía y la Defensoría del Pueblo por 
                         vulneración de los derechos a la seguridad personal y la tranquilidad.</p>
@@ -799,7 +849,7 @@
                 <div class="timeline-item">
                     <div class="timeline-date">24 de octubre de 2025</div>
                     <div class="timeline-content">
-                        <span class="accion-badge">VEEDURÍA</span>
+                        <span class="badge veeduria-badge">VEEDURÍA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Veeduría sobre Fondos de Estampilla</h4>
                         <p><strong>Comunicado N.º 008:</strong> Se informa sobre una sesión de control político en el Concejo de 
                         Manizales, donde se denunció la presunta no ejecución por parte de la Sede de los fondos de destinación 
@@ -811,9 +861,9 @@
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">Finales de 2025</div>
+                    <div class="timeline-date">Diciembre de 2025</div>
                     <div class="timeline-content">
-                        <span class="logro-badge">RESULTADO DE VEEDURÍA</span>
+                        <span class="badge logro-badge">RESULTADO DE VEEDURÍA</span>
                         <h4 style="font-weight: 700; margin: 1rem 0 0.5rem 0;">Separación de Cargos DAMA y DIMA</h4>
                         <div class="success-box" style="margin-top: 1rem;">
                             <strong>✓ LOGRO:</strong> Como resultado de la veeduría constante, las tutelas ganadas y la presión 
@@ -948,9 +998,10 @@
                         <li>Se denunció una inconsistencia de <strong>$7 mil millones de pesos</strong> entre presupuestos</li>
                     </ul>
                     <div class="alert-box" style="margin-top: 1rem;">
-                        <strong>Estado Actual (Octubre 2025):</strong> Los concursos docentes para la FCHS se encuentran congelados. 
-                        El motivo es la falta de los Proyectos Educativos del Programa (PEP), tal como lo advirtió esta Representación 
-                        en febrero.
+                        <strong>Estado Actual (Diciembre 2025):</strong> 
+                        Los concursos se congelaron por falta de los PEP de las dos carreras nuevas, tal como advirtió la Representación en febrero.
+                        Volvieron a abrirse y se encuentran en curso actualmente - es necesario hacer hincapié en los cambios de dedicación ocurridos por el traslado del Decano de la FCHS de unidad académica a la carrera de ciencias políticas mediante el uso de uno de los ETC disponibles para el concurso profesoral. 
+                        <strong>Los estudiantes del pregrado en Gestión Cultural y Comunicativa han realizado convocatorias a asambleas alertando el posible riesgo de cierre de la carrera</strong>.
                     </div>
                 </div>
 
@@ -1030,7 +1081,7 @@
 
                 <div class="proceso-item">
                     <div class="proceso-title">1. Tutela vs CSU por financiación irregular de MECUN</div>
-                    <div class="proceso-status">EN CURSO</div>
+                    <div class="proceso-status">EN CURSO - DICIEMBRE 2025</div>
                     <p>Acción de Tutela contra el Consejo Superior Universitario por vulnerar el derecho de petición al no 
                     responder sobre la fuente de financiación de la Mesa Constituyente.</p>
                     <p style="margin-top: 0.5rem;"><strong>Irregularidad:</strong> Uso de fondos de funcionamiento sin proyecto 
@@ -1039,7 +1090,7 @@
 
                 <div class="proceso-item">
                     <div class="proceso-title">2. Tutela por Seguridad Personal</div>
-                    <div class="proceso-status">EN CURSO</div>
+                    <div class="proceso-status">EN CURSO - DICIEMBRE 2025</div>
                     <p>Acción de amparo para la protección personal de la representante y solicitud a la Defensoría del Pueblo 
                     de crear un canal seguro para denunciantes.</p>
                     <p style="margin-top: 0.5rem;"><strong>Motivo:</strong> Respuesta intimidante de la Vicerrectora sugiriendo 
@@ -1048,7 +1099,7 @@
 
                 <div class="proceso-item">
                     <div class="proceso-title">3. Denuncia de hostigamiento contra el Decano de FCHS</div>
-                    <div class="proceso-status">SIN RESPUESTA</div>
+                    <div class="proceso-status">SIN RESPUESTA - DICIEMBRE 2025</div>
                     <p>Denuncia formal presentada en enero 2025 por hostigamiento y persecución.</p>
                     <p style="margin-top: 0.5rem;"><strong>Estado:</strong> La Vicerrectoría de Sede no ha dado respuesta ni 
                     trámite a la denuncia, situación agravada con el posterior nombramiento del profesor denunciado.</p>
@@ -1056,21 +1107,19 @@
 
                 <div class="proceso-item">
                     <div class="proceso-title">4. Seguimiento a la sostenibilidad de la FCHS</div>
-                    <div class="proceso-status">VALIDACIÓN DE VEEDURÍA</div>
+                    <div class="proceso-status">VALIDACIÓN DE VEEDURÍA - DICIEMBRE 2025</div>
                     <p>Monitoreo de los concursos docentes y desarrollo de la nueva facultad.</p>
-                    <p style="margin-top: 0.5rem;"><strong>Estado Actual:</strong> Los concursos se congelaron por  
-                    falta de los PEP de las dos carreras nuevas, tal como advirtió la Representación en febrero.
-                    Volvieron a abrirse y se encuentran en curso actualmente - es necesario hacer hincapié en los 
-                    cambios de dedicación ocurridos por el traslado del Decano de la FCHS de unidad académica a la 
-                    carrera de ciencias políticas mediante el uso de uno de los ETC disponibles para el concurso 
-                    profesoral.</strong>Los estudiantes del pregrado en Gestión Cultural y Comunicativa han realizado
-                    convocatorias a asambleas alertando el posible riesgo de cierre de la carrera <strong></p>
+                    
+                    <p style="margin-top: 1rem; font-size: 1rem; line-height: 1.6;">
+                        Los concursos se congelaron por falta de los PEP de las dos carreras nuevas, tal como advirtió la Representación en febrero. Volvieron a abrirse y se encuentran en curso actualmente - es necesario hacer hincapié en los cambios de dedicación ocurridos por el traslado del Decano de la FCHS de unidad académica a la carrera de ciencias políticas mediante el uso de uno de los ETC disponibles para el concurso profesoral. 
+                        <strong>Los estudiantes del pregrado en Gestión Cultural y Comunicativa han realizado convocatorias a asambleas alertando el posible riesgo de cierre de la carrera.</strong>
+                    </p>
                 </div>
 
                 <div class="proceso-item">
                     <div class="proceso-title">5. Veeduría sobre denuncias penales de la Toma 2024</div>
-                    <div class="proceso-status">EN SEGUIMIENTO</div>
-                    <p>Seguimiento a los procesos penales por hurto y daño en bien público .</p>
+                    <div class="proceso-status">EN SEGUIMIENTO - DICIEMBRE 2025</div>
+                    <p>Seguimiento a los procesos penales por hurto y daño en bien público.</p>
                     <p style="margin-top: 0.5rem;"><strong>NUNC:</strong> 170016000256202415970 y 170016000256202413807</p>
                     <p style="margin-top: 0.5rem;"><strong>Exigencia:</strong> Que la administración amplíe la denuncia e identifique 
                     a los responsables conocidos.</p>
@@ -1078,7 +1127,7 @@
 
                 <div class="proceso-item">
                     <div class="proceso-title">6. Veeduría sobre presunta no ejecución de fondos STEAM</div>
-                    <div class="proceso-status">ALERTA MÁXIMA</div>
+                    <div class="proceso-status">ALERTA MÁXIMA - DICIEMBRE 2025</div>
                     <p>Seguimiento a la presunta no ejecución de los fondos de destinación específica de la "Estampilla Pro-universidad".</p>
                     <p style="margin-top: 0.5rem;"><strong>Gravedad:</strong> Esta situación podría tener implicaciones 
                     administrativas y fiscales de una seriedad incalculable.</p>
@@ -1353,7 +1402,7 @@
                     <strong>La veeduría continúa. La defensa de lo público no descansa.</strong><br>
                     <em style="font-size: 1rem; display: block; margin-top: 1rem;">
                         Representación Profesoral - Sede Manizales<br>
-                        Octubre 2025
+                        Diciembre 2025
                     </em>
                 </div>
             </div>
@@ -1368,7 +1417,7 @@
             </div>
             <div class="footer-meta">
                 Universidad Nacional de Colombia - Sede Manizales<br>
-                Octubre 2025<br>
+                Diciembre 2025<br>
                 <br>
                 Rendición de Cuentas 2024-2025
             </div>
@@ -1376,7 +1425,7 @@
     </div>
 
     <script>
-        function showSection(sectionId) {
+        function showSection(sectionId, btnElement) {
             // Ocultar todas las secciones
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
@@ -1391,10 +1440,12 @@
             document.getElementById(sectionId).classList.add('active');
             
             // Activar el botón correspondiente
-            event.target.classList.add('active');
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
             
             // Scroll al inicio del contenido
-            document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('.content').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     </script>
 </body>
